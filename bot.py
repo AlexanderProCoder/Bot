@@ -1,14 +1,11 @@
-import telebot
 import config
+import telebot
 
-bot = telebot.TeleBot(config.TOKEN)
+bot = telebot.TeleBot('1158379679:AAFEyteRJO1uudJB29h0FoI397eefBXR67g')
 
+@bot.message_handler(content_types=["text"])
+def repeat_all_messages(message): # Название функции не играет никакой роли, в принципе
+    bot.send_message(message.chat.id, message.text)
 
-@bot.message_handler(content_types=['text'])
-def send_text(message):
-    if message.text == 'Привет':
-        bot.send_message(message.chat.id, 'Привет, мой создатель')
-    elif message.text == 'Пока':
-        bot.send_message(message.chat.id, 'Прощай, создатель')
-
-bot.polling()
+if __name__ == '__main__':
+     bot.polling(none_stop=True)
